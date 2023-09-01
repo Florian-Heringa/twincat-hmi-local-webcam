@@ -1,0 +1,52 @@
+<div id="MAIN" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-mode="Content" data-tchmi-min-width="100" data-tchmi-min-width-unit="%" data-tchmi-height-mode="Content" data-tchmi-min-height="100" data-tchmi-min-height-unit="%">
+  <div id="ViewDesktopBeckhoffLogo_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-src="Images/Beckhoff_Logo.svg" data-tchmi-left="20" data-tchmi-top="20" data-tchmi-width="194" data-tchmi-height="57">
+
+  </div>
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "MAIN.onAttached",
+    "actions": [
+      {
+        "objectType": "JavaScript",
+        "active": true,
+        "sourceLines": [
+          "// Get reference to caller element",
+          "let desktop = document.getElementById(ctx.args[0].__id);",
+          "// Create new video element",
+          "let video = document.createElement(\"video\");",
+          "",
+          "// Configure element",
+          "video.autoplay = true;",
+          "video.id = \"webStream\";",
+          "video.style.position = \"absolute !important\";",
+          "video.style.position = \"absolute\";",
+          "video.style.top = \"100px\";",
+          "video.style.left = \"100px\";",
+          "video.style.width = \"800px\";",
+          "video.style.height = \"640px\";",
+          "",
+          "// Add to DOM",
+          "desktop.appendChild(video);",
+          "",
+          "// Get cam",
+          "if (navigator.mediaDevices.getUserMedia) {",
+          "navigator.mediaDevices.getUserMedia({ video: true })",
+          "    .then(function (stream) {",
+          "    video.srcObject = stream;",
+          "    })",
+          "    .catch(function (err) {",
+          "    console.log(err);",
+          "    });",
+          "};"
+        ],
+        "injectContextObject": true,
+        "asyncWait": true,
+        "waitMode": "Synchronous"
+      }
+    ]
+  }
+]
+</script>
+</div>
